@@ -8,12 +8,13 @@ class Main:
 
     def read_csv():
         csv_path = input("Please enter csv file path: ")
+        row_organize = int(input("Which column would you like to organize? 0 is the first column: "))
         rows = []
         with open(csv_path, 'r') as csvfile:
             csvreader = csv.reader(csvfile)
             #saves content of entire first column into a list
             for row in csvreader:
-                rows.append(row[0])
+                rows.append(row[row_organize])
             print(rows)
             Main.sort_csv(rows)
     def sort_csv(arr):
@@ -27,7 +28,14 @@ class Main:
                     arr[i], arr[i+1] = arr[i+1], arr[i]
                     sorted = False
         print(arr)
-        return arr
+        Main.save_csv(arr)
+    
+    def save_csv(arr):
+        csv_path = input("Please enter csv file path: ")
+        with open(csv_path, 'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            for i in arr:
+                csvwriter.writerow([i])
 
 
 
