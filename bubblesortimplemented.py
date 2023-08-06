@@ -1,5 +1,6 @@
 #imports
 import csv
+import matplotlib.pyplot as plt
 
 class Main:
 
@@ -44,6 +45,25 @@ class Main:
             csvwriter = csv.writer(csvfile)
             for i in arr:
                 csvwriter.writerow([i])
+
+        plot = input("Plot data? Y or N")
+        if plot == "Y":
+            Main.plot_data(arr)
+    def plot_data(data):
+        counts = {}
+        for num in data:
+            counts[num] = counts.get(num, 0) + 1
+        
+        labels = list(counts.keys())
+        counts = list(counts.values())
+
+        plt.figure(figsize=(8, 8))
+        plt.pie(counts, labels=labels, autopct='%1.1f%%', startangle=140)
+        plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+        plt.show()
+
+
+
 
 
 
