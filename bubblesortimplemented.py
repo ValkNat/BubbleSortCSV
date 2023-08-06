@@ -7,16 +7,24 @@ class Main:
         Main.read_csv()
 
     def read_csv():
-        csv_path = input("Please enter csv file path: ")
+        csv_count = input("How many files would you like to sort?")
+        csv_path = []
+        i = 0
+        while i < int(csv_count):
+            csv_path.append(input("Please enter csv file path: "))
+            i += 1
         row_organize = int(input("Which column would you like to organize? 0 is the first column: "))
         rows = []
-        with open(csv_path, 'r') as csvfile:
-            csvreader = csv.reader(csvfile)
-            #saves content of entire first column into a list
-            for row in csvreader:
-                rows.append(row[row_organize])
-            print(rows)
-            Main.sort_csv(rows)
+
+        for i in csv_path:
+            with open(i, 'r') as csvfile:
+                csvreader = csv.reader(csvfile)
+                #saves content of entire first column into a list
+                for row in csvreader:
+                    rows.append(row[row_organize])
+                print(rows)
+        Main.sort_csv(rows)
+
     def sort_csv(arr):
         n = len(arr)
         sorted = False
